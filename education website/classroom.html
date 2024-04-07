@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(89, 116, 198);
+        }
+
+        header {
+            background-color: #120fc8;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #posts-container {
+            padding: 20px;
+        }
+
+        .post {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 20% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .submission {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .submission label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .submission input[type="file"] {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Classroom</h1>
+        <button id="create-post-btn">Create Assignment</button>
+    </header>
+    <div id="posts-container">
+      
+    </div>
+    <div id="post-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create Assignment</h2>
+            <form id="post-form">
+                <input type="text" id="post-title" placeholder="Title" required><br><br>
+                <input type="file" id="assignment-file" required><br>
+                <textarea id="post-content" placeholder="Content" required></textarea><br><br>
+                <label for="due-date">Due Date:</label>
+                <input type="date" id="due-date" required><br><br>
+                <div class="submission">
+                    <label for="assignment-file">Submission:</label>
+                    <input type="file" id="assignment-file" required><br>
+                    <textarea id="submission-comment" placeholder="Add a comment (optional)"></textarea>
+                </div>
+                <button type="submit">Post</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const createPostBtn = document.getElementById('create-post-btn');
+            const postModal = document.getElementById('post-modal');
+            const closeModal = document.querySelector('.close');
+            const postForm = document.getElementById('post-form');
+            const postsContainer = document.getElementById('posts-container');
+
+            createPostBtn.addEventListener('click', function() {
+                postModal.style.display = 'block';
+            });
+
+            closeModal.addEventListener('click', function() {
+                postModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == postModal) {
+                    postModal.style.display = 'none';
+                }
+            });
+
+            postForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const title = document.getElementById('post-title').value;
+                const content = document.getElementById('post-content').value;
+                const dueDate = document.getElementById('due-date').value;
+
+                const post = document.createElement('div');
+                post.className = 'post';
+                post.innerHTML = `
+                    <h3>${title}</h3>
+                    <p>${content}</p>
+                    <p><strong>Due Date:</strong> ${dueDate}</p>
+                `;
+
+                postsContainer.appendChild(post);
+
+                postModal.style.display = 'none';
+                postForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
