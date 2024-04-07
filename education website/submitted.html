@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitted Assignments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8de16;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        li:last-child {
+            margin-bottom: 0;
+        }
+
+        li:before {
+            content: "📝";
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Submitted Assignments</h1>
+        <button>sumitted!</button>
+        <ul id="assignmentList"></ul>
+    </div>
+
+    <script>
+        
+        function fetchAssignments() {
+            fetch('/assignments')
+            .then(response => response.json())
+            .then(data => {
+                const assignmentList = document.getElementById('assignmentList');
+                assignmentList.innerHTML = '';
+                data.forEach(assignment => {
+                    const assignmentItem = document.createElement('li');
+                    assignmentItem.textContent = `${assignment.title} - Due: ${assignment.dueDate}`;
+                    assignmentList.appendChild(assignmentItem);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+
+        fetchAssignments();
+    </script>
+</body>
+</html>

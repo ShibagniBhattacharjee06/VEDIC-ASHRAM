@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700;800;900&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: aquamarine;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: antiquewhite;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .yellow-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: yellow;
+            opacity: 0.5;
+            z-index: 1;
+            border-radius: 8px;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #333;
+            z-index: 2;
+            position: relative;
+        }
+
+        .questions-list {
+            list-style-type: none;
+            padding: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .question-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-item h3 {
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .question-item video {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+
+        .contact-info {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+        }
+
+        .contact-info p a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .language-options {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .language-options button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="yellow-overlay"></div>
+
+        <header>
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <img src="./assets/images/anxity.png" alt="Educator Logo">
+                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="chatbot.html">chatbot</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="container">
+                <h1>Mental Health Resources</h1>
+                <div class="language-options">
+                    <button id="englishBtn">English</button>
+                    <button id="hindiBtn">Hindi</button>
+                    <button id="bengaliBtn">Bengali</button>
+                </div>
+                <h2>Common Questions and Answers:</h2>
+                <ul class="questions-list">
+                
+                </ul>
+                <div class="contact-info">
+                    <h2>Contact Information:</h2>
+                    <p>Contact our psychiatrists for further assistance:</p>
+                    <p>Email: <a href="shibagni@gmail.com">shibagni@gmail.com</a></p>
+                    <p>Phone: <a href="tel:+7896543">+123456789</a></p>
+                    <p>Fill out our <a href="https://forms.gle/v2NrAE3QrWG3Sw4T7">Google Form</a> for appointments.</p>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <script>
+        const englishVideos = [
+            'anxiety_en.mp4',
+            'depression_en.mp4',
+            'failure_en.mp4',
+            'meditation_en.mp4'
+        ];
+
+        const hindiVideos = [
+            'anxiety_hi.mp4',
+            'depression_hi.mp4',
+            'failure_hi.mp4',
+            'meditation_hi.mp4'
+        ];
+
+        const bengaliVideos = [
+            'anxiety_bn.mp4',
+            'depression_bn.mp4',
+            'failure_bn.mp4',
+            'meditation_bn.mp4'
+        ];
+
+        const englishBtn = document.getElementById('englishBtn');
+        const hindiBtn = document.getElementById('hindiBtn');
+        const bengaliBtn = document.getElementById('bengaliBtn');
+
+        function loadVideos(videos) {
+            const videoElements = document.querySelectorAll('.question-item video');
+            videoElements.forEach((video, index) => {
+                if (videos[index]) {
+                    video.src = videos[index];
+                } else {
+                    video.src = '';
+                }
+            });
+        }
+
+        englishBtn.addEventListener('click', () => {
+            loadVideos(englishVideos);
+        });
+
+        hindiBtn.addEventListener('click', () => {
+            loadVideos(hindiVideos);
+        });
+
+        bengaliBtn.addEventListener('click', () => {
+            loadVideos(bengaliVideos);
+        });
+    </script>
+</body>
+
+</html>
