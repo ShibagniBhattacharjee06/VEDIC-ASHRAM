@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Scramble Game</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-image: url('background_image.jpg'); 
+        background-size: cover;
+        background-position: center; 
+    }
+    h1{
+        font-size: 5em;
+        color:rgb(18, 18, 17)
+    }
+
+    #scramble-container {
+        margin-top: 50px;
+    }
+
+    #scrambled-word {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    #hint {
+        font-style: italic;
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 24px;
+    }
+
+    #user-input {
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    #submit-button, #next-button {
+        padding: 15px 30px;
+        font-size: 20px;
+        cursor: pointer;
+        margin: 10px;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 24px;
+    }
+</style>
+</head>
+<body>
+<h1><b>Word Scramble Game</b></h1>
+<div id="scramble-container">
+    <div id="scrambled-word"></div>
+    <div id="hint"></div>
+    <input type="text" id="user-input" placeholder="Enter your guess">
+    <button id="submit-button">Submit</button>
+    <button id="next-button">Next</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    const words = [
+        { scrambled: 'PLAE', hint: 'Something round and often found in oysters', answer: 'PEARL' },
+        { scrambled: 'TCA', hint: 'It says "meow"', answer: 'CAT' },
+        { scrambled: 'GADRE', hint: 'A measure of your academic performance', answer: 'GRADE' },
+        { scrambled: 'LANTET', hint: 'A special skill or ability', answer: 'TALENT' },
+        { scrambled: 'OGOD', hint: 'The opposite of "bad"', answer: 'GOOD' },
+        { scrambled: 'ILMFY', hint: 'Thin and translucent, like certain fabrics', answer: 'FILMY' },
+        { scrambled: 'BRDEI', hint: 'A person getting married', answer: 'BRIDE' },
+        { scrambled: 'RNUIO', hint: 'The joining of two or more things', answer: 'UNION' },
+        { scrambled: 'EPNIS', hint: 'It\'s a part of your body that helps you stand tall', answer: 'SPINE' },
+        { scrambled: 'NAGDRAE', hint: 'A place where flowers, plants, and sometimes vegetables are grown', answer: 'GARDEN' },
+    ];
+
+    let currentWordIndex;
+    let currentWord;
+    let scrambledWord;
+    let correctWord;
+    let hint;
+
+    function scrambleWord(word) {
+        return word.split('').sort(() => Math.random() - 0.5).join('');
+    }
+
+    function newWord() {
+        currentWordIndex = Math.floor(Math.random() * words.length);
+        currentWord = words[currentWordIndex];
+        correctWord = currentWord.answer;
+        scrambledWord = scrambleWord(currentWord.scrambled);
+        hint = currentWord.hint;
+        document.getElementById('scrambled-word').textContent = scrambledWord;
+        document.getElementById('hint').textContent = `Hint: ${hint}`;
+        document.getElementById('user-input').value = '';
+        document.getElementById('result').textContent = '';
+        document.getElementById('submit-button').style.display = 'inline-block';
+        document.getElementById('next-button').style.display = 'none';
+    }
+
+    function checkGuess() {
+        const userGuess = document.getElementById('user-input').value.trim().toUpperCase();
+        if (userGuess === correctWord) {
+            document.getElementById('result').textContent = 'Correct!';
+            document.getElementById('submit-button').style.display = 'none';
+            document.getElementById('next-button').style.display = 'inline-block';
+        } else {
+            document.getElementById('result').textContent = 'Incorrect. Try again.';
+        }
+    }
+
+    function goToNextWord() {
+        newWord();
+    }
+
+    document.getElementById('submit-button').addEventListener('click', checkGuess);
+    document.getElementById('next-button').addEventListener('click', goToNextWord);
+
+    newWord();
+</script>
+</body>
+</html>
