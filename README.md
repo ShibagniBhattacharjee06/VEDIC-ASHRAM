@@ -1,4 +1,4 @@
-# 🌿 Vedic Ashram
+# 📚 Vedic Ashram
 
 ## 📘 Project Description
 
